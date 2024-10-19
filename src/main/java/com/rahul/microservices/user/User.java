@@ -2,12 +2,14 @@ package com.rahul.microservices.user;
 
 import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
+
 public class User {
     private Integer id;
     private String name;
-    private Local birthDay;
+    private LocalDate birthDay;
 
-    public User(Integer id, String name, Local birthDay) {
+    public User(Integer id, String name, LocalDate birthDay) {
         this.id = id;
         this.name = name;
         this.birthDay = birthDay;
@@ -29,11 +31,11 @@ public class User {
         this.name = name;
     }
 
-    public Local getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Local birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 
