@@ -1,8 +1,6 @@
 package com.rahul.microservices.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,10 +17,13 @@ public class UserController {
         return userDaoService.findAll();
     }
 
-    @GetMapping(path = "/user/{id}")
+    @GetMapping("/user/{id}")
     public User getUserUsingId(@PathVariable Integer id){
         return userDaoService.findOne(id);
     }
 
-
+    @PostMapping("/user")
+    public void createUser(@RequestBody User user){
+        userDaoService.creatNewUser(user);
+    }
 }
