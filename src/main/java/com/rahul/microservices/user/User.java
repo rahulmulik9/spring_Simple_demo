@@ -1,5 +1,6 @@
 package com.rahul.microservices.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -13,8 +14,11 @@ import java.time.LocalDate;
 public class User {
     private Integer id;
     @Size(min = 3, message = "Name should contain at least 3 character")
+    @JsonProperty("user_name")
     private String name;
+
     @Past(message = "Birthday should be in the past")
+    @JsonProperty("birth_date")
     private LocalDate birthDay;
 
     public User(Integer id, String name, LocalDate birthDay) {
