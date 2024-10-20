@@ -23,3 +23,5 @@ public class SomeBean {
 
 //   @JsonIgnoreProperties("field2","field3")                        //you can also ignore at class level
 //   public class SomeBean {
+
+//best way to use only @JsonIgnore above variables
