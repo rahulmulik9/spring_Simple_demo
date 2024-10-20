@@ -32,4 +32,8 @@ public class UserDaoService {
         users.add(new User(++count,newUser.getName(),newUser.getBirthDay()));
     }
 
+    public void deleteUsingId(Integer id) {
+        Predicate<? super User> predicate = user -> user.getId().equals(id);
+        users.removeIf(predicate);
+    }
 }
