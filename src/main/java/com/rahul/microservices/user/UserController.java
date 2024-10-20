@@ -59,6 +59,7 @@ public class UserController {
     // "all-user": {
     //"href": "http://localhost:8080/users"
     //}
+
     @GetMapping("/userHATEOAS/{id}")
     public EntityModel<User> getUserUsingIdHATEOAS(@PathVariable Integer id) {
         User foundUser = userDaoService.findOne(id);
