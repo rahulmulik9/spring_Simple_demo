@@ -1,5 +1,6 @@
 package com.rahul.microservices.user;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         userDaoService.creatNewUser(user);
         //redirect user to user/{id}
         URI userLocation = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -39,6 +40,7 @@ public class UserController {
                 .toUri();
         return ResponseEntity.created(null).build();
     }
+
 
     @DeleteMapping("user/{id}")
     public void deleteUserUsingId(@PathVariable Integer id){
