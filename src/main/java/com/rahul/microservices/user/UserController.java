@@ -1,5 +1,6 @@
 package com.rahul.microservices.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public void createUser(@RequestBody User user){
+    public ResponseEntity<Object> createUser(@RequestBody User user){
         userDaoService.creatNewUser(user);
+        return ResponseEntity.created(null).build();
     }
 }
