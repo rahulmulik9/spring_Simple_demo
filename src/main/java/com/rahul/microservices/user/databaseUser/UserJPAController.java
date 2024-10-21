@@ -1,7 +1,6 @@
 package com.rahul.microservices.user.databaseUser;
 
 import com.rahul.microservices.user.UserNotFoundException;
-import jakarta.persistence.Entity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
