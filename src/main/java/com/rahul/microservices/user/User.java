@@ -1,6 +1,9 @@
 package com.rahul.microservices.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -11,8 +14,12 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
+@Entity(name="user_details")
 public class User {
+    @Id
+    @GeneratedValue
     private Integer id;
+
     @Size(min = 3, message = "Name should contain at least 3 character")
     @JsonProperty("user_name")
     private String name;
