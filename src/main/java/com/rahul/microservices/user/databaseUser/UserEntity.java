@@ -1,4 +1,4 @@
-package com.rahul.microservices.user;
+package com.rahul.microservices.user.databaseUser;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
@@ -8,27 +8,27 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
 @Setter
 @Getter
-@Entity(name="user_details")
-public class User {
+@Entity(name = "user_details")
+public class UserEntity {
     @Id
     @GeneratedValue
     private Integer id;
 
     @Size(min = 3, message = "Name should contain at least 3 character")
-    @JsonProperty("user_name")
     private String name;
 
     @Past(message = "Birthday should be in the past")
-    @JsonProperty("birth_date")
     private LocalDate birthDate;
 
-    public User(Integer id, String name, LocalDate birthDate) {
+    public UserEntity() {
+    }
+
+    public UserEntity(Integer id, String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -43,3 +43,4 @@ public class User {
                 '}';
     }
 }
+

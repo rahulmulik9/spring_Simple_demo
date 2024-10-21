@@ -1,5 +1,6 @@
-package com.rahul.microservices.user;
+package com.rahul.microservices.user.simpleuser;
 
+import com.rahul.microservices.user.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;

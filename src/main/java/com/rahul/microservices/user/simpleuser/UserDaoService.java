@@ -1,4 +1,4 @@
-package com.rahul.microservices.user;
+package com.rahul.microservices.user.simpleuser;
 
 import org.springframework.stereotype.Component;
 
