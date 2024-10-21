@@ -2,6 +2,7 @@ package com.rahul.microservices.user.databaseUser;
 
 import com.rahul.microservices.user.UserNotFoundException;
 import com.rahul.microservices.user.post.Post;
+import com.rahul.microservices.user.post.PostRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -19,9 +20,12 @@ public class UserJPAController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-    public UserJPAController(UserRepository userRepository) {
+    public UserJPAController(UserRepository userRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
+        this.postRepository = postRepository;
     }
 
     @GetMapping(path = "/jpa/users")
@@ -63,5 +67,23 @@ public class UserJPAController {
             throw new UserNotFoundException("Id");
         }
         return foundUser.get().getPosts();
+    }
+
+    @PostMapping("/jpa/user/{id}/posts")
+    public ResponseEntity<Object> createPostForUser(@PathVariable Integer id,@Valid @RequestBody Post post) {
+        Optional<UserEntity> foundUser = userRepository.findById(id);
+        if (foundUser == null) {
+            throw new UserNotFoundException("Id");
+        }
+        post.setUserEntity(foundUser.get());
+        Post savedPost = postRepository.save(post);
+
+        //redirect user to user/{id}
+        URI userLocation = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+
+        return ResponseEntity.created(null).build();
     }
 }
