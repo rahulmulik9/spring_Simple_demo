@@ -39,8 +39,6 @@ public class UserJPAController {
         return entity;
     }
 
-
-
     @DeleteMapping("/jpauser/{id}")
     public void deleteUserUsingId(@PathVariable Integer id){
         userRepository.deleteById(id);
@@ -56,23 +54,4 @@ public class UserJPAController {
                 .toUri();
         return ResponseEntity.created(null).build();
     }
-
-
-//    //here we map getById method to getalluser moethod
-//    //output will be like this
-//    // "all-user": {
-//    //"href": "http://localhost:8080/users"
-//    //}
-//
-//    @GetMapping("/userHATEOAS/{id}")
-//    public EntityModel<User> getUserUsingIdHATEOAS(@PathVariable Integer id) {
-//        User foundUser = userDaoService.findOne(id);
-//        if (foundUser == null) {
-//            throw new UserNotFoundException("Id");
-//        }
-//        EntityModel<User> enityModel = EntityModel.of(foundUser);
-//        WebMvcLinkBuilder linkBuilder = linkTo(methodOn(this.getClass()).retrieveAllUsers());
-//        enityModel.add(linkBuilder.withRel("all-user"));
-//        return enityModel;
-//    }
 }
