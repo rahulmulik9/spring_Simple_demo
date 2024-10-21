@@ -2,10 +2,14 @@ package com.rahul.microservices.user.databaseUser;
 
 import com.rahul.microservices.user.UserNotFoundException;
 import jakarta.persistence.Entity;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,26 +38,26 @@ public class UserJPAController {
         EntityModel<UserEntity> entity = EntityModel.of(foundUser.get());
         return entity;
     }
-//
-//    @PostMapping("/jpa/user")
-//    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-//        userDaoService.creatNewUser(user);
-//        //redirect user to user/{id}
-//        URI userLocation = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(user.getId())
-//                .toUri();
-//        return ResponseEntity.created(null).build();
-//    }
-//
-//
-//    @DeleteMapping("/jpauser/{id}")
-//    public void deleteUserUsingId(@PathVariable Integer id){
-//        userDaoService.deleteUsingId(id);
-//
-//    }
-//
-//
+
+
+
+    @DeleteMapping("/jpauser/{id}")
+    public void deleteUserUsingId(@PathVariable Integer id){
+        userRepository.deleteById(id);
+    }
+
+    @PostMapping("/jpa/user")
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserEntity user) {
+        userRepository.save(user);
+        //redirect user to user/{id}
+        URI userLocation = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+        return ResponseEntity.created(null).build();
+    }
+
+
 //    //here we map getById method to getalluser moethod
 //    //output will be like this
 //    // "all-user": {
