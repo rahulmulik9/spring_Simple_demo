@@ -1,6 +1,7 @@
 package com.rahul.microservices.user.databaseUser;
 
 import com.rahul.microservices.user.UserNotFoundException;
+import com.rahul.microservices.user.post.Post;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -19,7 +20,7 @@ public class UserJPAController {
     @Autowired
     private UserRepository userRepository;
 
-    public UserJPAController( UserRepository userRepository) {
+    public UserJPAController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -39,7 +40,7 @@ public class UserJPAController {
     }
 
     @DeleteMapping("/jpauser/{id}")
-    public void deleteUserUsingId(@PathVariable Integer id){
+    public void deleteUserUsingId(@PathVariable Integer id) {
         userRepository.deleteById(id);
     }
 
@@ -52,5 +53,15 @@ public class UserJPAController {
                 .buildAndExpand(user.getId())
                 .toUri();
         return ResponseEntity.created(null).build();
+    }
+
+
+    @GetMapping("/jpa/user/{id}/posts")
+    public List<Post> retrievePostForUser(@PathVariable Integer id) {
+        Optional<UserEntity> foundUser = userRepository.findById(id);
+        if (foundUser == null) {
+            throw new UserNotFoundException("Id");
+        }
+        return foundUser.get().getPosts();
     }
 }
