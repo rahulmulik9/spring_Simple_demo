@@ -1,12 +1,16 @@
 package com.rahul.microservices.user.databaseUser;
 
+import com.rahul.microservices.user.UserNotFoundException;
+import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+@RestController
 public class UserJPAController {
 
     @Autowired
@@ -20,15 +24,16 @@ public class UserJPAController {
     public List<UserEntity> retrieveAllUsers() {
         return userRepository.findAll();
     }
-//
-//    @GetMapping("/jpa/user/{id}")
-//    public User getUserUsingId(@PathVariable Integer id) {
-//        User foundUser = userDaoService.findOne(id);
-//        if (foundUser == null) {
-//            throw new UserNotFoundException("Id");
-//        }
-//        return userDaoService.findOne(id);
-//    }
+
+    @GetMapping("/jpa/user/{id}")
+    public EntityModel<UserEntity> getUserUsingId(@PathVariable Integer id) {
+        Optional<UserEntity> foundUser = userRepository.findById(id);
+        if (foundUser == null) {
+            throw new UserNotFoundException("Id");
+        }
+        EntityModel<UserEntity> entity = EntityModel.of(foundUser.get());
+        return entity;
+    }
 //
 //    @PostMapping("/jpa/user")
 //    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
