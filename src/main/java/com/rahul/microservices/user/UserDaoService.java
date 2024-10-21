@@ -29,7 +29,7 @@ public class UserDaoService {
     }
 
     public void creatNewUser(User newUser){
-        users.add(new User(++count,newUser.getName(),newUser.getBirthDay()));
+        users.add(new User(++count,newUser.getName(),newUser.getBirthDate()));
     }
 
     public void deleteUsingId(Integer id) {

@@ -26,12 +26,12 @@ public class User {
 
     @Past(message = "Birthday should be in the past")
     @JsonProperty("birth_date")
-    private LocalDate birthDay;
+    private LocalDate birthDate;
 
-    public User(Integer id, String name, LocalDate birthDay) {
+    public User(Integer id, String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
-        this.birthDay = birthDay;
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", birthDay=" + birthDay +
+                ", birthDay=" + birthDate +
                 '}';
     }
 }
