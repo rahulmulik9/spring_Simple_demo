@@ -1,7 +1,7 @@
 package com.rahul.microservices.user.post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rahul.microservices.user.databaseUser.UserEntity;
+import com.rahul.microservices.user.user.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

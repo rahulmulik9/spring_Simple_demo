@@ -1,4 +1,4 @@
-package com.rahul.microservices.user.databaseUser;
+package com.rahul.microservices.user.user;
 
 import com.rahul.microservices.user.UserNotFoundException;
 import com.rahul.microservices.user.post.Post;

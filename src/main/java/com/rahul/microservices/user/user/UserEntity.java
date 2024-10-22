@@ -1,7 +1,6 @@
-package com.rahul.microservices.user.databaseUser;
+package com.rahul.microservices.user.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rahul.microservices.user.post.Post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
